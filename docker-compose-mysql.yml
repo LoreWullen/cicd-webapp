@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: animals
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password1
+    volumes:
+      - db_data:/var/lib/mysql
+
+  webapp:
+    build: .
+    depends_on:
+      - db
+    environment:
+      MYSQL_URL: mysql://root:mysql@db:3306/animals
+
+  test:
+    image: webapp-webapp
+    environment:
+      - API_URL=http://webapp:3000 
+    depends_on:
+      - webapp
+    command: yarn test
+    profiles:
+      - test
+
+volumes:
+  db_data:

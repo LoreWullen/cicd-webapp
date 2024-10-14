@@ -1,0 +1,6 @@
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose-sqlite.yml
+README.md
+node_modules
