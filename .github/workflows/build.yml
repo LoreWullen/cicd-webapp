@@ -18,9 +18,14 @@ jobs:
         run: yarn install
       - name: Lint the code
         run: yarn lint
+      - name: Log in Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: false
+          push: true
           tags: lorewullen/webapp:latest
