@@ -17,4 +17,4 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Lint the code
-        run: yarn lint --no-error-on-unmatched-pattern
+        run: yarn lint
